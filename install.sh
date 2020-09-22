@@ -14,4 +14,7 @@ pip3 install powerline-status
 cp -r /usr/local/lib/python3.8/site-packages/powerline/config-files /root/.config/powerline
 fish -c "omf install powerline"
 
+# Openstack Autocompletion
+openstack complete --shell fish > /root/.config/fish/conf.d/openstack.fish
+
 chsh /usr/bin/fish
