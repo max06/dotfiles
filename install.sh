@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # Dotfile install script
 
-apt-get install fish
+apt-get install vim fish
