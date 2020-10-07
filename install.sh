@@ -18,3 +18,4 @@ fish -c "omf install powerline"
 openstack complete --shell fish > /root/.config/fish/conf.d/openstack.fish
 
 chsh /usr/bin/fish
+echo "fish" >> /root/.bashrc
