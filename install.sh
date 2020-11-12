@@ -17,5 +17,9 @@ fish -c "omf install powerline"
 # Openstack Autocompletion
 openstack complete --shell fish > /root/.config/fish/conf.d/openstack.fish
 
+# Ansible env settings
+echo "set -gx ANSIBLE_STDOUT_CALLBACK actionable > /root/.config/fish/conf.d/ansible-env.fish"
+echo "set -gx ANSIBLE_DIFF_ALWAYS true >> /root/.config/fish/conf.d/ansible-env.fish"
+
 chsh /usr/bin/fish
 echo "fish" >> /root/.bashrc
