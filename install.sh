@@ -15,6 +15,7 @@ cp -r /usr/local/lib/python3.8/site-packages/powerline/config-files /root/.confi
 fish -c "omf install powerline"
 
 # Openstack Autocompletion
+pip3 install osc-fish-complete
 openstack complete --shell fish > /root/.config/fish/conf.d/openstack.fish
 
 # Ansible env settings
