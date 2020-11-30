@@ -19,6 +19,12 @@ pip3 install osc-fish-complete
 openstack complete --shell fish > /root/.config/fish/conf.d/openstack.fish
 alias os openstack >> /root/.config/fish/conf.d/openstack.fish
 
+# Kubernetes Autocompletion
+mkdir -p ~/.config/fish/completions
+cd ~/.config/fish
+git clone https://github.com/evanlucas/fish-kubectl-completions
+ln -s ../fish-kubectl-completions/completions/kubectl.fish completions/
+
 # Ansible env settings
 echo "set -gx ANSIBLE_STDOUT_CALLBACK actionable > /root/.config/fish/conf.d/ansible-env.fish"
 echo "set -gx ANSIBLE_DIFF_ALWAYS true >> /root/.config/fish/conf.d/ansible-env.fish"
