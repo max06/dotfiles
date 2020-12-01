@@ -17,7 +17,7 @@ fish -c "omf install powerline"
 # Openstack Autocompletion
 pip3 install osc-fish-complete
 openstack complete --shell fish > /root/.config/fish/conf.d/openstack.fish
-alias os openstack >> /root/.config/fish/conf.d/openstack.fish
+echo "alias os openstack" >> /root/.config/fish/conf.d/openstack.fish
 
 # Kubernetes Autocompletion
 mkdir -p ~/.config/fish/completions
