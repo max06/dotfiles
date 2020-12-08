@@ -26,8 +26,8 @@ git clone https://github.com/evanlucas/fish-kubectl-completions
 ln -s ../fish-kubectl-completions/completions/kubectl.fish completions/
 
 # Ansible env settings
-echo "set -gx ANSIBLE_STDOUT_CALLBACK actionable > /root/.config/fish/conf.d/ansible-env.fish"
-echo "set -gx ANSIBLE_DIFF_ALWAYS true >> /root/.config/fish/conf.d/ansible-env.fish"
+echo "set -gx ANSIBLE_STDOUT_CALLBACK actionable" > /root/.config/fish/conf.d/ansible-env.fish
+echo "set -gx ANSIBLE_DIFF_ALWAYS true" >> /root/.config/fish/conf.d/ansible-env.fish
 
 chsh /usr/bin/fish
 echo "fish" >> /root/.bashrc
