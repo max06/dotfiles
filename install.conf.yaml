@@ -22,10 +22,8 @@
       command: >
         [ -x "$(command -v openstack)" ] && 
         pip3 install osc-fish-complete &&
-        openstack complete --shell fish > ~/.config/fish/completions/openstack.fish' 
+        openstack complete --shell fish > ~/.config/fish/completions/openstack.fish 
       description: Setting up openstack completion 
-      stdout: true
-      stderr: true
 - link:
     ~/.config/fish/conf.d/openstack.fish:
       if: '[ -x "$(command -v openstack)" ]'
@@ -38,8 +36,6 @@
         git clone https://github.com/evanlucas/fish-kubectl-completions ~/.config/fish/fish-kubectl-completions &&
         ln -s ~/.config/fish/fish-kubectl-completions/completions/kubectl.fish ~/.config/fish/completions/
       description: Setting up k8s completion
-      stdout: true
-      stderr: true
 
 - link:
     ~/.config/fish/conf.d/ansible.fish:
