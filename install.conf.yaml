@@ -1,0 +1,45 @@
+- defaults:
+    link:
+      relink: true
+
+- create:
+    - ~/.config/fish/conf.d
+    - ~/.config/fish/completions
+
+- shell:
+    - [ "apt-get install -y vim-nox fish powerline", "Base packages"]
+    - [ "curl -L https://get.oh-my.fish > /tmp/install", "Get Oh my fish"]
+    - [ '[ -f ~/.config/fish/conf.d/omf.fish ] || fish /tmp/install --verbose --noninteractive', "Install Oh my fish"]
+
+- link:
+    ~/.bashrc:
+      force: true
+    ~/.config/fish/conf.d/powerline.fish:
+
+# Openstack
+- shell:
+    - 
+      command: >
+        [ '[ -x "$(command -v openstack)" ] && 
+        pip3 install osc-fish-complete &&
+        openstack complete --shell fish > ~/.config/fish/conf.d/openstack.fish &&
+        echo "alias os openstack" >> ~/.config/fish/conf.d/openstack.fish' ]
+      description: Setting up openstack completion 
+
+
+# Kubernetes
+- shell:
+    - 
+      command: > 
+        [ '[ -x "$(command -v kubectl)" ] &&
+        git clone https://github.com/evanlucas/fish-kubectl-completions ~/.config/fish/fish-kubectl-completions
+        ln -s ~/.config/fish/fish-kubectl-completions/completions/kubectl.fish ~/.config/fish/completions/' ]
+      description: Setting up k8s completion
+
+
+- link:
+    ~/.config/fish/conf.d/ansible.fish:
+      if: '[ -x "$(command -v ansible)" ]'
+
+
+
