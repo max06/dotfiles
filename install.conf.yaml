@@ -7,9 +7,10 @@
     - ~/.config/fish/completions
 
 - shell:
-    - [ "apt-get install -y vim-nox fish powerline", "Base packages"]
-    - [ "curl -L https://get.oh-my.fish > /tmp/install", "Get Oh my fish"]
-    - [ '[ -f ~/.config/fish/conf.d/omf.fish ] || fish /tmp/install --verbose --noninteractive', "Install Oh my fish"]
+    - [ "apt-get update && apt-get install -y vim-nox fish powerline", "Base packages" ]
+    - [ "curl -L https://get.oh-my.fish > /tmp/install", "Get Oh my fish" ]
+    - [ '[ -f ~/.config/fish/conf.d/omf.fish ] || fish /tmp/install --verbose --noninteractive', "Install Oh my fish" ]
+    - [ 'wget https://github.com/mikefarah/yq/releases/download/v4.9.3/yq_linux_amd64 -O /usr/bin/yq && chmod +x /usr/bin/yq', "Install yq" ]
 
 - link:
     ~/.bashrc:
@@ -26,6 +27,8 @@
       description: Setting up openstack completion 
 - link:
     ~/.config/fish/conf.d/openstack.fish:
+      if: '[ -x "$(command -v openstack)" ]'
+    ~/.config/fish/completions/ose.fish:
       if: '[ -x "$(command -v openstack)" ]'
 
 # Kubernetes
