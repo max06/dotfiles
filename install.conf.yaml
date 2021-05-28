@@ -37,7 +37,7 @@
       command: > 
         [ -x "$(command -v kubectl)" ] &&
         git clone https://github.com/evanlucas/fish-kubectl-completions ~/.config/fish/fish-kubectl-completions &&
-        ln -s ~/.config/fish/fish-kubectl-completions/completions/kubectl.fish ~/.config/fish/completions/
+        ln -s ~/.config/fish/fish-kubectl-completions/completions/kubectl.fish ~/.config/fish/completions/ || true
       description: Setting up k8s completion
 
 - link:
