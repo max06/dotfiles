@@ -33,7 +33,7 @@
 - link:
     ~/.config/fish/conf.d/powerline.fish:
       path: config/fish/conf.d/powerline.fish
-    ~/.config/powerline/:
+    ~/.config/powerline:
       path: config/powerline/
 
 # Ansible
