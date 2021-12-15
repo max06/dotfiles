@@ -1,48 +1,79 @@
+# Dotbot defaults
 - defaults:
     link:
       relink: true
+    shell:
+      quiet: true
 
+# Base Packages (as root)
+- sudo:
+    - ifdebian:
+        - shell:
+            - description: Fetch fish repository 
+              command: >
+                echo "deb http://download.opensuse.org/repositories/shells:/fish:/release:/3/Debian_$(lsb_release -rs)/ /" | sudo tee /etc/apt/sources.list.d/shells:fish:release:3.list &&
+                curl -fsSL https://download.opensuse.org/repositories/shells:fish:release:3/Debian_$(lsb_release -rs)/Release.key | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/shells_fish_release_3.gpg > /dev/null
+              quiet: true
+    - shell:
+        - description: Base packages
+          command: >
+            apt-get update &&
+            apt-get install -y vim-nox fish powerline
+        - description: Install latest yq
+          command: >
+            wget https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64 -O /usr/bin/yq &&
+            chmod +x /usr/bin/yq
+
+# Fish stuff
 - create:
     - ~/.config/fish/conf.d
     - ~/.config/fish/completions
 
 - shell:
-    - [ "apt-get update && apt-get install -y vim-nox fish powerline", "Base packages" ]
-    - [ "curl -L https://get.oh-my.fish > /tmp/install", "Get Oh my fish" ]
-    - [ '[ -f ~/.config/fish/conf.d/omf.fish ] || fish /tmp/install --verbose --noninteractive', "Install Oh my fish" ]
-    - [ 'wget https://github.com/mikefarah/yq/releases/download/v4.9.3/yq_linux_amd64 -O /usr/bin/yq && chmod +x /usr/bin/yq', "Install yq" ]
-
-- link:
-    ~/.bashrc:
-      force: true
-    ~/.config/fish/conf.d/powerline.fish:
-
-# Openstack
-- shell:
-    - 
+    - description: Get Oh my fish installer
       command: >
-        [ -x "$(command -v openstack)" ] && 
-        pip3 install osc-fish-complete &&
-        openstack complete --shell fish > ~/.config/fish/completions/openstack.fish 
-      description: Setting up openstack completion 
+        curl -L https://raw.githubusercontent.com/oh-my-fish/oh-my-fish/master/bin/install > /tmp/install
+    - description: Install Oh my fish
+      command: >
+        [ -f ~/.config/fish/conf.d/omf.fish ] || fish /tmp/install --verbose --noninteractive
+
 - link:
-    ~/.config/fish/conf.d/openstack.fish:
-      if: '[ -x "$(command -v openstack)" ]'
-    ~/.config/fish/completions/ose.fish:
-      if: '[ -x "$(command -v openstack)" ]'
+    ~/.config/fish/conf.d/powerline.fish:
+      path: config/fish/conf.d/powerline.fish
+    ~/.config/powerline:
+      path: config/powerline/
+
+# Ansible
+- link:
+    ~/.config/fish/conf.d/ansible.fish:
+      path: config/fish/conf.d/ansible.fish
+      if: '[ -x "$(command -v ansible)" ]'
 
 # Kubernetes
 - shell:
-    - 
-      command: > 
+    - description: Completion for kubectl
+      command: >
         [ -x "$(command -v kubectl)" ] &&
         git clone https://github.com/evanlucas/fish-kubectl-completions ~/.config/fish/fish-kubectl-completions &&
         ln -s ~/.config/fish/fish-kubectl-completions/completions/kubectl.fish ~/.config/fish/completions/ || true
-      description: Setting up k8s completion
+      
+# Openstack
+- shell:
+    - description: Completion for Openstack
+      command: >
+        [ -x "$(command -v openstack)" ] && 
+        pip3 install osc-fish-complete &&
+        openstack complete --shell fish > ~/.config/fish/completions/openstack.fish
 
 - link:
-    ~/.config/fish/conf.d/ansible.fish:
-      if: '[ -x "$(command -v ansible)" ]'
+    ~/.config/fish/conf.d/openstack.fish:
+      path: config/fish/conf.d/openstack.fish
+      if: '[ -x "$(command -v openstack)" ]'
+    ~/.config/fish/completions/ose.fish:
+      path: config/fish/completions/ose.fish
+      if: '[ -x "$(command -v openstack)" ]'
 
-
-
+# Finalize
+- link:
+    ~/.bashrc:
+      force: true
