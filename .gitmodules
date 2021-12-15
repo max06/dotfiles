@@ -5,3 +5,6 @@
 [submodule "dotbot-sudo"]
 	path = plugins/sudo
 	url = https://github.com/DrDynamic/dotbot-sudo.git
+[submodule "plugins/ifplatform"]
+	path = plugins/ifplatform
+	url = https://github.com/ssbanerje/dotbot-ifplatform.git
