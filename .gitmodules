@@ -8,3 +8,6 @@
 [submodule "plugins/ifplatform"]
 	path = plugins/ifplatform
 	url = https://github.com/max06/dotbot-ifplatform.git
+[submodule "plugins/brew"]
+	path = plugins/brew
+	url = https://github.com/wren/dotbot-brew.git
