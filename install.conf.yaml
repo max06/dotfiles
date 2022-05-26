@@ -5,27 +5,25 @@
     shell:
       quiet: true
 
+    brewfile:
+      stdout: true
+    brew:
+      stderr: true
+      stdout: true
+
+# Some things are easier to install using brew, provided by the image
+- brew:
+    - fish
+    - yq 
+    - jc
+
 # Base Packages (as root)
 - sudo:
-    - ifdebian:
-        - shell:
-            - description: Fetch fish repository
-              command: >
-                echo "deb http://download.opensuse.org/repositories/shells:/fish:/release:/3/Debian_$(lsb_release -rs)/ /" | sudo tee /etc/apt/sources.list.d/shells:fish:release:3.list &&
-                curl -fsSL https://download.opensuse.org/repositories/shells:fish:release:3/Debian_$(lsb_release -rs)/Release.key | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/shells_fish_release_3.gpg > /dev/null
-              quiet: true
     - shell:
         - description: Base packages
           command: >
             apt-get update &&
-            apt-get install -y vim-nox fish powerline
-        - description: Install latest yq
-          command: >
-            wget https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64 -O /usr/bin/yq &&
-            chmod +x /usr/bin/yq
-        - description: Install jc 1.19.0
-          command: >
-            wget -qO- https://github.com/kellyjonbrazil/jc/releases/download/v1.19.0/jc-1.19.0-linux-x86_64.tar.gz | tar -xz -C /usr/bin && chmod +x /usr/bin/jc
+            apt-get install -y vim-nox powerline
 
 # Fish stuff
 - create:
