@@ -23,6 +23,9 @@
           command: >
             wget https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64 -O /usr/bin/yq &&
             chmod +x /usr/bin/yq
+        - description: Install jc 1.19.0
+          command: >
+            wget -qO- https://github.com/kellyjonbrazil/jc/releases/download/v1.19.0/jc-1.19.0-linux-x86_64.tar.gz | tar -xz -C /usr/bin && chmod +x /usr/bin/jc
 
 # Fish stuff
 - create:
