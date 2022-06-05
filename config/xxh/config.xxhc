@@ -1,0 +1,7 @@
+hosts:
+  ".*":                       # for all hosts
+    +s: fish                    # use Fish shell
+    +I:                         # install xxh packages (if not installed)
+      - xxh-shell-fish            # install portable fish
+      - xxh-plugin-prerun-core
+      - https://github.com/max06/xxh-plugin-prerun-dotfiles

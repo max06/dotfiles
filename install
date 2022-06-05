@@ -2,6 +2,14 @@
 
 set -e
 
+# Get homebrew if not installed yet
+if [ ! -d "/home/linuxbrew" ]; then
+    curl -s https://raw.githubusercontent.com/microsoft/vscode-dev-containers/main/script-library/homebrew-debian.sh | sudo bash -s -- auto true true
+fi
+
+export PS1=foo
+source /etc/bash.bashrc
+
 CONFIG="install.conf.yaml"
 DOTBOT_DIR="dotbot"
 
