@@ -1,80 +1,33 @@
 # Dotbot defaults
 - defaults:
-    link:
-      relink: true
     shell:
       quiet: true
-
-    brewfile:
-      stdout: true
-    brew:
-      stderr: true
       stdout: true
 
-# Some things are easier to install using brew, provided by the image
-- brew:
-    - fish
-    - yq 
-    - jc
-
-# Base Packages (as root)
-- sudo:
-    - shell:
-        - description: Base packages
-          command: >
-            apt-get update &&
-            apt-get install -y vim-nox powerline
-
-# Fish stuff
-- create:
-    - ~/.config/fish/conf.d
-    - ~/.config/fish/completions
-
+# Role selection
 - shell:
-    - description: Get Oh my fish installer
+    - description: Base configuration
       command: >
-        curl -L https://raw.githubusercontent.com/oh-my-fish/oh-my-fish/master/bin/install > /tmp/install
-    - description: Install Oh my fish
+        ./install -c roles/base.conf.yaml
+
+    - description: XXH
       command: >
-        [ -f ~/.config/fish/conf.d/omf.fish ] || fish /tmp/install --verbose --noninteractive
+        ./install -c roles/xxh.conf.yaml
 
-- link:
-    ~/.config/fish/conf.d/powerline.fish:
-      path: config/fish/conf.d/powerline.fish
-    ~/.config/powerline:
-      path: config/powerline/
-
-# Ansible
-- link:
-    ~/.config/fish/conf.d/ansible.fish:
-      path: config/fish/conf.d/ansible.fish
-      if: '[ -x "$(command -v ansible)" ]'
-
-# Kubernetes
-- shell:
-    - description: Completion for kubectl
+    - description: Ansible
       command: >
-        [ -x "$(command -v kubectl)" ] &&
-        git clone https://github.com/evanlucas/fish-kubectl-completions ~/.config/fish/fish-kubectl-completions &&
-        ln -s ~/.config/fish/fish-kubectl-completions/completions/kubectl.fish ~/.config/fish/completions/ || true
-
-# Openstack
-- shell:
-    - description: Completion for Openstack
+        [ -x "$(command -v ansible)" ] && ./install -c roles/ansible.conf.yaml || true
+     
+    - description: Kubectl
       command: >
-        [ -x "$(command -v openstack)" ] &&
-        pip3 install osc-fish-complete &&
-        openstack complete --shell fish > ~/.config/fish/completions/openstack.fish || true
+        [ -x "$(command -v kubectl)" ] && ./install -c roles/kubectl.conf.yaml || true
 
-- link:
-    ~/.config/fish/conf.d/openstack.fish:
-      path: config/fish/conf.d/openstack.fish
-      if: '[ -x "$(command -v openstack)" ]'
-    ~/.config/fish/completions/ose.fish:
-      path: config/fish/completions/ose.fish
-      if: '[ -x "$(command -v openstack)" ]'
+    - description: OpenStack
+      command: >
+        [ -x "$(command -v openstack)" ] && ./install -c roles/openstack.conf.yaml || true
 
 # Finalize
 - link:
     ~/.bashrc:
       force: true
+      relink: true

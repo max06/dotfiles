@@ -1,0 +1,42 @@
+# Base configuration
+
+- defaults:
+    link:
+      relink: true
+    shell:
+      quiet: true
+      stdout: true
+
+# Base Packages via apt
+- sudo:
+    - shell:
+        - description: Base packages
+          command: >
+            apt-get update &&
+            apt-get install -y vim-nox
+          stdout: false
+
+# More packages via brew
+- brew:
+    - fish
+    - yq
+    - jc
+
+# Fish stuff
+- create:
+    - ~/.config/fish/conf.d
+    - ~/.config/fish/completions
+
+- shell:
+    - description: Get Oh my fish installer
+      command: >
+        curl -L https://raw.githubusercontent.com/oh-my-fish/oh-my-fish/master/bin/install > /tmp/install
+    - description: Install Oh my fish
+      command: >
+        [ -f ~/.config/fish/conf.d/omf.fish ] || fish /tmp/install --verbose --noninteractive
+
+- link:
+    ~/.config/fish/conf.d/powerline.fish:
+      path: config/fish/conf.d/powerline.fish
+    ~/.config/powerline:
+      path: config/powerline/

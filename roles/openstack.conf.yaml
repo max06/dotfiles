@@ -1,0 +1,12 @@
+# Openstack
+- shell:
+    - description: Completions for Openstack
+      command: >
+        pip3 install osc-fish-complete;
+        openstack complete --shell fish > ~/.config/fish/completions/openstack.fish || true
+
+- link:
+    ~/.config/fish/conf.d/openstack.fish:
+      path: config/fish/conf.d/openstack.fish
+    ~/.config/fish/completions/ose.fish:
+      path: config/fish/completions/ose.fish

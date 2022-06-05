@@ -1,0 +1,7 @@
+# Kubernetes
+
+- shell:
+    - description: Completion for kubectl
+      command: >
+        wget https://github.com/evanlucas/fish-kubectl-completions/raw/main/completions/kubectl.fish
+        -O ~/.config/fish/completions/kubectl.fish

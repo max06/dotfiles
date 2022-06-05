@@ -1,0 +1,4 @@
+# Ansible
+- link:
+    ~/.config/fish/conf.d/ansible.fish:
+      path: config/fish/conf.d/ansible.fish

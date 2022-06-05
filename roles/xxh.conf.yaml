@@ -1,0 +1,18 @@
+# XXH and its configuration
+- create:
+    - ~/.config/xxh
+
+- brew:
+    - xxh
+
+- link: 
+    ~/.config/xxh/config.xxhc:
+      path: config/xxh/config.xxhc
+
+- shell:
+    - description: Install xxh plugins
+      command: >
+        xxh 
+        +I xxh-shell-fish
+        +I xxh-plugin-prerun-core
+        +I https://github.com/max06/xxh-plugin-prerun-dotfiles
