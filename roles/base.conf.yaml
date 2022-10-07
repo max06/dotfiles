@@ -38,5 +38,7 @@
 - link:
     ~/.config/fish/conf.d/powerline.fish:
       path: config/fish/conf.d/powerline.fish
+    ~/.config/fish/conf.d/vscode-integration.fish:
+      path: config/fish/conf.d/vscode-integration.fish
     ~/.config/powerline:
       path: config/powerline/
